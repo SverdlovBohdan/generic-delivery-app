@@ -23,7 +23,7 @@ class RestarauntRepository: CategoriesRepository, ProductsRepository {
             .serializingDecodable([ProductItem].self)
             .result
     }
-    
+
     func getProducts(for categories: [Category]) async -> [Result<[ProductItem], RepositoryError>] {
         await withTaskGroup(of: Result<[ProductItem], RepositoryError>.self) { group in
                 for category in categories {

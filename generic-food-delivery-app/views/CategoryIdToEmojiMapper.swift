@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol IdToEmojiiMapper {
+protocol CategoryIdToEmojiMapper {
     func map(id: Int) -> String
 }

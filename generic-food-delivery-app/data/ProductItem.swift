@@ -18,7 +18,12 @@ struct ProductItem: Codable, Identifiable {
     var iikoId: String
     var slug: String
     var mainImage: MainImage
+    var backgroundImage: BackgroundImage
     var category: Category
+    var hide: Int
+    var visible: Bool {
+        return hide == 0
+    }
     
     enum CodingKeys: String, CodingKey {
         case remoteId = "id"
@@ -26,11 +31,13 @@ struct ProductItem: Codable, Identifiable {
         case name = "name_ua"
         case iikoId = "iiko_id"
         case mainImage = "main_image"
+        case backgroundImage = "background_image"
         
         case price
         case weight
         case slug
         case category
+        case hide
     }
 }
 
@@ -43,7 +50,21 @@ extension ProductItem {
         }
     }
     
+    struct BackgroundImage: Codable {
+        var url: String
+        
+        enum CodingKeys: String, CodingKey {
+            case url = "urlForList"
+        }
+    }
+    
     struct Category: Codable {
         var id: Int
     }
+    
+    #if DEBUG
+    static let preview: ProductItem = .init(remoteId: 13, name: "Boul chicken", description: "Boul chicken Boul chicken Boul chicken",
+                                            price: 178.0000, weight: 300, iikoId: "", slug: "", mainImage: .init(url: ""),
+                                            backgroundImage: .init(url: ""), category: .init(id: 13), hide: 0)
+    #endif
 }

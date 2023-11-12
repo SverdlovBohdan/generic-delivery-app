@@ -14,5 +14,5 @@ protocol ResourcesPath {
 
 extension ResourcesPath {
     var categories: String { "api/categories?lang=ukrainian" }
-    var products: String { "api/products?lang=ukrainian" }
+    var products: String { "api/products?lang=ukrainian&withChildren=true&type=1" }
 }

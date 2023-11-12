@@ -11,6 +11,7 @@ struct AddressesView: View {
     var addresses: [Customer.Address]
     let editable: Bool
 
+    // TODO: Extract to viewStore
     @State private var street: String = ""
     @State private var appartment: String = ""
     @State private var canAddNewAddress: Bool = true
