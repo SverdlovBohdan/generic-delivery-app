@@ -9,30 +9,23 @@ import SwiftUI
 
 struct RestarauntMenuView: View {
     //TODO: Use DI
-    private var restaraunt: ProductsProvider = Restaraunt()
-    private var categoryIdToEmojii: CategoryIdToEmojiMapper = Restaraunt()
+    private var restaraunt: ProductsProvider = Restaraunt.shared
+    private var categoryData: CategoryDataGetter = Restaraunt.shared
     
-    @State private var error: String = ""
-    @State private var products: [ProductItem] = []
-    @State private var screenWidth: CGFloat = .zero
+    @State private var viewState: RestarauntViewStateStore = .makeDefault()
     
     private let rows = Array<GridItem>(repeating: GridItem(.flexible()), count: 3)
     
     private var groupedProductsByCategories: [Int: [ProductItem]] {
-        Dictionary(grouping: products, by: \.category.id)
+        Dictionary(grouping: viewState.products, by: \.category.id)
     }
     
     private var categoriesIds: [Int] {
         Array<Int>(groupedProductsByCategories.keys).sorted()
     }
     
-    @ViewBuilder
-    private func makeSectionTitle(categoryId: Int) -> some View {
-        HStack {
-            Text(categoryIdToEmojii.map(id: categoryId))
-            Spacer()
-        }
-    }
+    private let progressTitle: String = String("🤤 ") + String(localized: "Looking a menu")
+    private let errorTitle: String = String("😐 ") + String(localized: "Crap! We have an error")
     
     var body: some View {
         NavigationStack {
@@ -40,32 +33,59 @@ struct RestarauntMenuView: View {
                 LazyVStack(pinnedViews: .sectionHeaders) {
                     
                     ForEach(categoriesIds, id: \.self) { categoryId in
-                        Section(header: makeSectionTitle(categoryId: categoryId)) {
+                        Section(header: CategorySectionHeaderView(categoryId: categoryId)) {
                             
                             ScrollView(.horizontal, showsIndicators: false) {
                                 LazyHGrid(rows: rows) {
                                     ForEach(groupedProductsByCategories[categoryId]!, id: \.id) { product in
                                         ProductRowItemView(product: product)
+                                            .padding(.leading, 8)
                                     }
                                 }
                                 .scrollTargetLayout()
                             }
                             .scrollTargetBehavior(.viewAligned)
-                            
                         }
                     }
                 }
             }
             .navigationTitle(String(localized: "Menu"))
-            .task {
-                await restaraunt.getAvailableProducts { productsResult in
-                    switch productsResult {
-                    case .success(let availableProduts):
-                        products = availableProduts
-                    case .failure(let productsError):
-                        error = productsError.localizedDescription
+            .overlay(content: {
+                if viewState.inProgress {
+                    ProgressView(progressTitle)
+                        .ignoresSafeArea()
+                } else if let error = viewState.error {
+                    HStack {
+                        Text(errorTitle)
+                            .font(.subheadline)
+                        Text(error)
+                        
+                        Button(String(localized: "Try againt")) {
+                            viewState.dispatch(action: .showProgress)
+                            Task { @MainActor in
+                                await getProducts()
+                            }
+                        }
                     }
+                    .ignoresSafeArea()
                 }
+            })
+            .task {
+                if viewState.noProducts {
+                    viewState.dispatch(action: .showProgress)
+                    await getProducts()
+                }
+            }
+        }
+    }
+    
+    private func getProducts() async {
+        return await restaraunt.getAvailableProducts { productsResult in
+            switch productsResult {
+            case .success(let availableProduts):
+                viewState.dispatch(action: .setProducts(availableProduts))
+            case .failure(let productsError):
+                viewState.dispatch(action: .setError(productsError.localizedDescription))
             }
         }
     }

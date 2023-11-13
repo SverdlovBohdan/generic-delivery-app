@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 protocol ProductsProvider {
     typealias SideEffect = (Result<[ProductItem], RepositoryError>) -> Void

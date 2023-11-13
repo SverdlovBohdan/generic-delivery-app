@@ -25,6 +25,12 @@ struct GrowingButton: ButtonStyle {
 struct ProductRowItemView: View {
     var product: ProductItem
     
+    private var imageWidth: CGFloat = 60.0
+    
+    init(product: ProductItem) {
+        self.product = product
+    }
+    
     var body: some View {        
         HStack {
             AsyncImage(url: .init(string: url)) { image in
@@ -32,7 +38,7 @@ struct ProductRowItemView: View {
             } placeholder: {
                 ProgressView()
             }
-            .frame(width: 60, height: 60)
+            .frame(width: imageWidth, height: imageWidth)
             
             VStack(alignment: .leading) {
                 Text(product.name)
@@ -41,7 +47,7 @@ struct ProductRowItemView: View {
                     .lineLimit(1)
                     .foregroundStyle(.secondary)
             }
-            .frame(width: 180)
+            .frame(width: imageWidth * 3)
             
             Spacer()
             

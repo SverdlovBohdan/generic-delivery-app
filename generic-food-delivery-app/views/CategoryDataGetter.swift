@@ -7,6 +7,7 @@
 
 import Foundation
 
-protocol CategoryIdToEmojiMapper {
-    func map(id: Int) -> String
+protocol CategoryDataGetter {
+    func getEmoji(id: Int) -> String
+    func getCategoryName(id: Int) async -> String
 }

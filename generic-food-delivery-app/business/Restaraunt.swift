@@ -7,11 +7,15 @@
 
 import Foundation
 
-class Restaraunt: ProductsProvider, CategoryIdToEmojiMapper {
+class Restaraunt: ProductsProvider, CategoryDataGetter {
     //TODO: Use DI
     private var categoriesRepository: CategoriesRepository = RestarauntRepository()
     private var productsRepository: ProductsRepository = RestarauntRepository()
     
+    @MainActor
+    private var categoriesCache: [Category] = []
+    
+    @MainActor
     func getAvailableProducts(sideEffect: ProductsProvider.SideEffect) async {
         let result = await categoriesRepository.getCategories()
         
@@ -21,7 +25,7 @@ class Restaraunt: ProductsProvider, CategoryIdToEmojiMapper {
             var availableProducts: [ProductItem] = []
             allProducts.forEach { categoryProductsResult in
                 if case .success(let products) = categoryProductsResult {
-                    var productsWithParentCategory = products.map { productItem in
+                    let productsWithParentCategory = products.map { productItem in
                         var item: ProductItem = productItem
                         
                         categories.forEach { categoryItem in
@@ -38,6 +42,8 @@ class Restaraunt: ProductsProvider, CategoryIdToEmojiMapper {
                     availableProducts.append(contentsOf: productsWithParentCategory.filter(\.visible))
                 }
             }
+            
+            categoriesCache = categories
             sideEffect(.success(availableProducts))
    
         case .failure(let categoriesCannotBeObtained):
@@ -45,7 +51,14 @@ class Restaraunt: ProductsProvider, CategoryIdToEmojiMapper {
         }
     }
     
-    func map(id: Int) -> String {
+    @MainActor
+    func getCategoryName(id: Int) async -> String {
+        return categoriesCache.first { category in
+            return category.id == id
+        }?.name ?? ""
+    }
+    
+    func getEmoji(id: Int) -> String {
         switch id {
         case 14:
             return "🥘"
@@ -77,4 +90,9 @@ class Restaraunt: ProductsProvider, CategoryIdToEmojiMapper {
             return "🥘"
         }
     }
+}
+
+
+extension Restaraunt {
+    static var shared: Restaraunt = .init()
 }
