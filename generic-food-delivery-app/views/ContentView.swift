@@ -14,20 +14,31 @@ struct ContentView: View {
                 .tabItem {
                     Label("Menu", systemImage: "rectangle")
                 }
-
-            Text("1")
-                .tabItem {
-                    Label("My order", systemImage: "rectangle")
+            
+            NavigationStack {
+                UserDataView { accountViewState in
+                    AccountView(viewState: accountViewState, editable: false)
+                } orderSection: {
+                    OrderView()
                 }
-
-            AccountView()
-                .tabItem {
-                    Label("Account", systemImage: "rectangle")
+            }
+            .tabItem {
+                Label("My order", systemImage: "rectangle")
+            }
+            
+            NavigationStack {
+                UserDataView { accountViewState in
+                    AccountView(viewState: accountViewState, editable: true)
                 }
+            }
+            .tabItem {
+                Label("Account", systemImage: "rectangle")
+            }
         }
     }
 }
 
 #Preview {
     ContentView()
+        .environment(NavigationStore.makeDefault())
 }

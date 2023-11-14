@@ -11,10 +11,10 @@ import SwiftUI
 enum NavigationAction: CustomStringConvertible {
     case openProductView(ProductItem)
     case openRootView
-    
+
     var description: String {
         switch self {
-        case .openProductView(_):
+        case .openProductView:
             return "openProductView"
         case .openRootView:
             return "openRootView"
@@ -27,16 +27,17 @@ struct NavigationState {
 }
 
 typealias NavigationStore = ViewStateStore<NavigationAction,
-                                           NavigationState>
+    NavigationState>
 
 func navigationReducer(currentState: inout NavigationState,
-                       action: NavigationAction) {
+                       action: NavigationAction)
+{
     switch action {
-    case .openProductView(let product):
+    case let .openProductView(product):
         if currentState.path.isEmpty {
             currentState.path = NavigationPath([product])
         }
-        
+
     case .openRootView:
         currentState.path = NavigationPath()
     }
@@ -46,7 +47,7 @@ extension ViewStateStore where State == NavigationState, Action == NavigationAct
     static var shared: NavigationStore {
         return NavigationStore(initialState: .init(), reducer: navigationReducer)
     }
-    
+
     static func makeDefault() -> NavigationStore {
         return NavigationStore(initialState: .init(), reducer: navigationReducer)
     }

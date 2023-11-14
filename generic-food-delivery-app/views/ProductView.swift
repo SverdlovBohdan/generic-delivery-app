@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProductView: View {
     @Environment(NavigationStore.self) private var navigation: NavigationStore
-    
+
     var product: ProductItem
 
     // TODO: Use DI

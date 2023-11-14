@@ -53,6 +53,9 @@
 		0EA6BAD52AFFCF0700F53963 /* DebugConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6BAD42AFFCF0700F53963 /* DebugConfiguration.swift */; };
 		0EB0164B2AFBF8B7003DF1A7 /* AddressesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB0164A2AFBF8B7003DF1A7 /* AddressesView.swift */; };
 		0EC099712B03DFD600668411 /* NavigationViewStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC099702B03DFD600668411 /* NavigationViewStateStore.swift */; };
+		0EC099732B03F2DE00668411 /* OrderViewStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC099722B03F2DE00668411 /* OrderViewStateStore.swift */; };
+		0EC099752B03F85300668411 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC099742B03F85300668411 /* OrderView.swift */; };
+		0EC099772B040B6700668411 /* GenericUserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC099762B040B6700668411 /* GenericUserDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +121,9 @@
 		0EA6BAD42AFFCF0700F53963 /* DebugConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugConfiguration.swift; sourceTree = "<group>"; };
 		0EB0164A2AFBF8B7003DF1A7 /* AddressesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesView.swift; sourceTree = "<group>"; };
 		0EC099702B03DFD600668411 /* NavigationViewStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewStateStore.swift; sourceTree = "<group>"; };
+		0EC099722B03F2DE00668411 /* OrderViewStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewStateStore.swift; sourceTree = "<group>"; };
+		0EC099742B03F85300668411 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
+		0EC099762B040B6700668411 /* GenericUserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericUserDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +246,8 @@
 				0E8D03092B0249E60061D966 /* CategorySectionHeaderView.swift */,
 				0E8D030E2B027EF50061D966 /* ProductView.swift */,
 				0EA67FD32B02A8040084F48D /* ButtonSyles.swift */,
+				0EC099742B03F85300668411 /* OrderView.swift */,
+				0EC099762B040B6700668411 /* GenericUserDataView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -251,6 +259,7 @@
 				0E6557A82AEFF00F00CB4094 /* AccountViewStateStore.swift */,
 				0E8D030B2B02607F0061D966 /* RestaruntViewStateStore.swift */,
 				0EC099702B03DFD600668411 /* NavigationViewStateStore.swift */,
+				0EC099722B03F2DE00668411 /* OrderViewStateStore.swift */,
 			);
 			path = view_state_store;
 			sourceTree = "<group>";
@@ -462,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E1F3C282AFFD8490009697A /* RestarauntMenuView.swift in Sources */,
+				0EC099732B03F2DE00668411 /* OrderViewStateStore.swift in Sources */,
 				0E830F532B0007A60002F354 /* Restaraunt.swift in Sources */,
 				0EA6BAD52AFFCF0700F53963 /* DebugConfiguration.swift in Sources */,
 				0E6557A72AEFEC2600CB4094 /* AccountUserDefaults.swift in Sources */,
@@ -469,6 +479,8 @@
 				0E6557AD2AEFFD7700CB4094 /* AccountInteractor.swift in Sources */,
 				0EA6BACC2AFFCC0C00F53963 /* CategoryDataGetter.swift in Sources */,
 				0E8D030F2B027EF50061D966 /* ProductView.swift in Sources */,
+				0EC099772B040B6700668411 /* GenericUserDataView.swift in Sources */,
+				0EC099752B03F85300668411 /* OrderView.swift in Sources */,
 				0E6557A12AEFE9D700CB4094 /* Customer.swift in Sources */,
 				0E65579F2AEFE8A600CB4094 /* AccountView.swift in Sources */,
 				0EC099712B03DFD600668411 /* NavigationViewStateStore.swift in Sources */,
