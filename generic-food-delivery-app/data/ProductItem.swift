@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProductItem: Codable, Identifiable {
+struct ProductItem: Codable, Identifiable, Hashable {
     var id: UUID = .init()
 
     var remoteId: Int
@@ -42,7 +42,7 @@ struct ProductItem: Codable, Identifiable {
 }
 
 extension ProductItem {
-    struct MainImage: Codable {
+    struct MainImage: Codable, Hashable {
         var url: String
 
         enum CodingKeys: String, CodingKey {
@@ -50,7 +50,7 @@ extension ProductItem {
         }
     }
 
-    struct BackgroundImage: Codable {
+    struct BackgroundImage: Codable, Hashable {
         var url: String
 
         enum CodingKeys: String, CodingKey {
@@ -58,7 +58,7 @@ extension ProductItem {
         }
     }
 
-    struct Category: Codable {
+    struct Category: Codable, Hashable {
         var id: Int
     }
 

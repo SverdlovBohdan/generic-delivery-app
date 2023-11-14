@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct generic_food_delivery_appApp: App {
+    @State private var navigationViewState: NavigationStore = .makeDefault()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(navigationViewState)
         }
     }
 }

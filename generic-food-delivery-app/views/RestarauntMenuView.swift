@@ -12,23 +12,25 @@ struct RestarauntMenuView: View {
     private var restaraunt: ProductsProvider = Restaraunt.shared
     private var categoryData: CategoryDataGetter = Restaraunt.shared
 
+    
+    @Environment(NavigationStore.self) private var navigation: NavigationStore
     @State private var viewState: RestarauntViewStateStore = .makeDefault()
-
+    
     private let rows = [GridItem](repeating: GridItem(.flexible()), count: 3)
-
+    
     private var groupedProductsByCategories: [Int: [ProductItem]] {
         Dictionary(grouping: viewState.products, by: \.category.id)
     }
-
+    
     private var categoriesIds: [Int] {
         [Int](groupedProductsByCategories.keys).sorted()
     }
-
+    
     private let progressTitle: String = .init("🤤 ") + String(localized: "Looking a menu")
     private let errorTitle: String = .init("😐 ") + String(localized: "Crap! We have an error")
-
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: navigationPathBinding) {
             ScrollView(showsIndicators: false) {
                 LazyVStack(pinnedViews: .sectionHeaders) {
                     ForEach(categoriesIds, id: \.self) { categoryId in
@@ -47,6 +49,9 @@ struct RestarauntMenuView: View {
                     }
                 }
             }
+            .navigationDestination(for: ProductItem.self, destination: { product in
+                ProductView(product: product)
+            })
             .navigationTitle(String(localized: "Menu"))
             .overlay(content: {
                 if viewState.inProgress {
@@ -57,7 +62,7 @@ struct RestarauntMenuView: View {
                         Text(errorTitle)
                             .font(.subheadline)
                         Text(error)
-
+                        
                         Button(String(localized: "Try againt")) {
                             viewState.dispatch(action: .showProgress)
                             Task { @MainActor in
@@ -69,14 +74,23 @@ struct RestarauntMenuView: View {
                 }
             })
             .task {
-                if viewState.noProducts {
+                if viewState.viewState.noProducts {
                     viewState.dispatch(action: .showProgress)
                     await getProducts()
                 }
-            }
+        }
         }
     }
+    
+    private var navigationPathBinding: Binding<NavigationPath> {
+        .init {
+            navigation.path
+        } set: { newValue in
+            navigation.path = newValue
+        }
 
+    }
+    
     private func getProducts() async {
         await restaraunt.getAvailableProducts { productsResult in
             switch productsResult {
@@ -91,4 +105,5 @@ struct RestarauntMenuView: View {
 
 #Preview {
     RestarauntMenuView()
+        .environment(NavigationStore.makeDefault())
 }

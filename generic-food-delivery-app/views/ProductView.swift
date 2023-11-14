@@ -9,6 +9,8 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct ProductView: View {
+    @Environment(NavigationStore.self) private var navigation: NavigationStore
+    
     var product: ProductItem
 
     // TODO: Use DI
@@ -28,7 +30,7 @@ struct ProductView: View {
                 WebImage(url: .init(string: product.backgroundImage.url))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
                     .task {
                         categoryName = await categoryData.getCategoryName(id: product.category.id)
                     }
@@ -76,7 +78,7 @@ struct ProductView: View {
                     .foregroundStyle(.white)
                     .padding()
             }
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
             .background {
                 WebImage(url: .init(string: product.backgroundImage.url))
                     .placeholder(content: {
@@ -87,18 +89,26 @@ struct ProductView: View {
                     .blur(radius: 56)
             }
             .ignoresSafeArea(.container, edges: .top)
-//            .overlay(alignment: .topLeading) {
-//                Image(systemName: "x.circle.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: imageWidth * 0.2)
-//                    .foregroundStyle(.white.opacity(0.7))
-//                    .padding()
-//            }
+            .overlay(alignment: .topLeading) {
+                Image(systemName: "x.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: imageWidth * 0.2)
+                    .foregroundStyle(.white.opacity(0.7))
+                    .padding()
+                    .onTapGesture {
+                        navigation.dispatch(action: .openRootView)
+                    }
+            }
         }
     }
 }
 
 #Preview {
-    ProductView(product: .preview)
+    TabView {
+        NavigationStack {
+            ProductView(product: .preview)
+                .environment(NavigationStore.makeDefault())
+        }
+    }
 }

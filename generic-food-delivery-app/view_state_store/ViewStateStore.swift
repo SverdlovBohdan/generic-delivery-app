@@ -19,5 +19,8 @@ class ViewStateStore<Action, State> where Action: CustomStringConvertible {
         reduce(&viewState, action)
     }
 
-    subscript<T>(dynamicMember keyPath: KeyPath<State, T>) -> T { viewState[keyPath: keyPath] }
+    subscript<T>(dynamicMember keyPath: WritableKeyPath<State, T>) -> T {
+        get { viewState[keyPath: keyPath] }
+        set { viewState[keyPath: keyPath] = newValue }
+    }
 }

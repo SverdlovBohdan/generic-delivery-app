@@ -52,6 +52,7 @@
 		0EA6BAD22AFFCEA000F53963 /* ApplicationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6BAD12AFFCEA000F53963 /* ApplicationConfiguration.swift */; };
 		0EA6BAD52AFFCF0700F53963 /* DebugConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6BAD42AFFCF0700F53963 /* DebugConfiguration.swift */; };
 		0EB0164B2AFBF8B7003DF1A7 /* AddressesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB0164A2AFBF8B7003DF1A7 /* AddressesView.swift */; };
+		0EC099712B03DFD600668411 /* NavigationViewStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC099702B03DFD600668411 /* NavigationViewStateStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		0EA6BAD12AFFCEA000F53963 /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
 		0EA6BAD42AFFCF0700F53963 /* DebugConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugConfiguration.swift; sourceTree = "<group>"; };
 		0EB0164A2AFBF8B7003DF1A7 /* AddressesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesView.swift; sourceTree = "<group>"; };
+		0EC099702B03DFD600668411 /* NavigationViewStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewStateStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 				0E65579B2AEFE5EF00CB4094 /* ViewStateStore.swift */,
 				0E6557A82AEFF00F00CB4094 /* AccountViewStateStore.swift */,
 				0E8D030B2B02607F0061D966 /* RestaruntViewStateStore.swift */,
+				0EC099702B03DFD600668411 /* NavigationViewStateStore.swift */,
 			);
 			path = view_state_store;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				0E8D030F2B027EF50061D966 /* ProductView.swift in Sources */,
 				0E6557A12AEFE9D700CB4094 /* Customer.swift in Sources */,
 				0E65579F2AEFE8A600CB4094 /* AccountView.swift in Sources */,
+				0EC099712B03DFD600668411 /* NavigationViewStateStore.swift in Sources */,
 				0E8D030C2B02607F0061D966 /* RestaruntViewStateStore.swift in Sources */,
 				0E6557AB2AEFFD2100CB4094 /* AccountUserInputValidator.swift in Sources */,
 				0E1F3C1E2AFFD3D20009697A /* ResourcesPath.swift in Sources */,
