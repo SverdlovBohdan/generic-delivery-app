@@ -5,8 +5,8 @@
 //  Created by Bohdan Sverdlov on 11.11.2023.
 //
 
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct ProductRowItemView: View {
     var product: ProductItem
@@ -19,13 +19,13 @@ struct ProductRowItemView: View {
 
     var body: some View {
         HStack {
-            WebImage(url: .init(string: product.mainImage.url))
-                .resizable()
-                .indicator(.activity)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .frame(width: imageWidth, height: imageWidth)
-
             NavigationLink(destination: ProductView(product: product)) {
+                WebImage(url: .init(string: product.mainImage.url))
+                    .resizable()
+                    .indicator(.activity)
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .frame(width: imageWidth, height: imageWidth)
+
                 VStack(alignment: .leading) {
                     Text(product.name)
                         .lineLimit(2)

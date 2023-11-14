@@ -5,23 +5,23 @@
 //  Created by Bohdan Sverdlov on 13.11.2023.
 //
 
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct ProductView: View {
     var product: ProductItem
-    
-    //TODO: Use DI
+
+    // TODO: Use DI
     private var categoryData: CategoryDataGetter = Restaraunt.shared
-    
+
     @State private var categoryName: String = ""
-    
+
     private let imageWidth: CGFloat = 120
-    
+
     init(product: ProductItem) {
         self.product = product
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
@@ -32,14 +32,14 @@ struct ProductView: View {
                     .task {
                         categoryName = await categoryData.getCategoryName(id: product.category.id)
                     }
-                
+
                 VStack {
                     WebImage(url: .init(string: product.mainImage.url))
                         .resizable()
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .offset(y: -imageWidth / 2.0)
                         .frame(width: imageWidth, height: imageWidth)
-                    
+
                     Group {
                         Text(product.name)
                             .font(.title)
@@ -47,7 +47,7 @@ struct ProductView: View {
                             .font(.subheadline)
                     }
                     .foregroundStyle(.white)
-                    
+
                     Button(action: {}, label: {
                         HStack {
                             Text(String(format: "%.2f", product.price))
@@ -62,7 +62,7 @@ struct ProductView: View {
                                       foregroundColor: .blue,
                                       backgroundColor: .white)
                     )
-                    
+
                     Image(systemName: "chevron.compact.down")
                         .resizable()
                         .scaledToFit()
@@ -70,12 +70,13 @@ struct ProductView: View {
                         .foregroundStyle(.white.opacity(0.5))
                         .padding()
                 }
-                
+
                 Text(product.description)
                     .font(.headline)
                     .foregroundStyle(.white)
                     .padding()
             }
+            .navigationBarTitleDisplayMode(.inline)
             .background {
                 WebImage(url: .init(string: product.backgroundImage.url))
                     .placeholder(content: {
@@ -86,6 +87,14 @@ struct ProductView: View {
                     .blur(radius: 56)
             }
             .ignoresSafeArea(.container, edges: .top)
+//            .overlay(alignment: .topLeading) {
+//                Image(systemName: "x.circle.fill")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: imageWidth * 0.2)
+//                    .foregroundStyle(.white.opacity(0.7))
+//                    .padding()
+//            }
         }
     }
 }
