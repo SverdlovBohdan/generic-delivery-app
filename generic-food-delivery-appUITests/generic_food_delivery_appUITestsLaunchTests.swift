@@ -8,7 +8,6 @@
 import XCTest
 
 final class generic_food_delivery_appUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

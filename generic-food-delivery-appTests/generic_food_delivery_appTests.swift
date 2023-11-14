@@ -5,11 +5,10 @@
 //  Created by Bohdan Sverdlov on 30.10.2023.
 //
 
-import XCTest
 @testable import generic_food_delivery_app
+import XCTest
 
 final class generic_food_delivery_appTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -28,9 +27,8 @@ final class generic_food_delivery_appTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

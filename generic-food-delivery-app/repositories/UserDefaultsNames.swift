@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct UserDefaultsNames {
+enum UserDefaultsNames {
     static let accountKey: String = "account_db"
 }

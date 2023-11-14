@@ -12,5 +12,5 @@ protocol ApplicationConfiguration {
 }
 
 extension ApplicationConfiguration {
-    var baseUrl: String { "https://vilki-palki.od.ua" } 
+    var baseUrl: String { "https://vilki-palki.od.ua" }
 }

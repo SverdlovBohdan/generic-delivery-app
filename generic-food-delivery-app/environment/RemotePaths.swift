@@ -8,15 +8,15 @@
 import Foundation
 
 class RemotePaths: RemotePathProvider {
-    //TODO: Use DI
+    // TODO: Use DI
     private var configuration: ApplicationConfiguration = DebugConfiguration()
     private var paths: ResourcesPath = VilkiPalkiPaths()
-    
+
     func getCategoriesPath() -> String {
-        return "\(configuration.baseUrl)/\(paths.categories)"
+        "\(configuration.baseUrl)/\(paths.categories)"
     }
-    
+
     func getCategoryProducts(for category: Category) -> String {
-        return "\(configuration.baseUrl)/\(paths.products)&category=\(category.id)"
+        "\(configuration.baseUrl)/\(paths.products)&category=\(category.id)"
     }
 }

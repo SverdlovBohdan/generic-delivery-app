@@ -7,5 +7,4 @@
 
 import Foundation
 
-struct VilkiPalkiPaths: ResourcesPath {
-}
+struct VilkiPalkiPaths: ResourcesPath {}

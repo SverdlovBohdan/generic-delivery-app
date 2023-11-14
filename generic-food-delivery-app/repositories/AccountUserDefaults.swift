@@ -9,15 +9,15 @@ import Foundation
 
 class AccountUserDefaults: AccountRepository {
     // TODO: Switch to DI
-    private let accountDataBase: UserDefaults = UserDefaults.standard
-    private let encoder: JSONEncoder = JSONEncoder()
-    private let decoder: JSONDecoder = JSONDecoder()
-    
+    private let accountDataBase: UserDefaults = .standard
+    private let encoder: JSONEncoder = .init()
+    private let decoder: JSONDecoder = .init()
+
     func read() -> Customer {
         guard let accountRaw = performAccountRead() else {
             return .unknownUser
         }
-        
+
         do {
             return try performAccountDecode(accountRaw: accountRaw)
         } catch {
@@ -25,18 +25,18 @@ class AccountUserDefaults: AccountRepository {
             return .unknownUser
         }
     }
-    
+
     func write(account: Customer) {
         guard let accountRaw = try? encoder.encode(account) else { return }
         accountDataBase.set(accountRaw, forKey: UserDefaultsNames.accountKey)
     }
-    
+
     /// For unit tests only.
     fileprivate func performAccountRead() -> Data? {
-        return accountDataBase.data(forKey: UserDefaultsNames.accountKey)
+        accountDataBase.data(forKey: UserDefaultsNames.accountKey)
     }
-    
+
     fileprivate func performAccountDecode(accountRaw: Data) throws -> Customer {
-        return try decoder.decode(Customer.self, from: accountRaw)
+        try decoder.decode(Customer.self, from: accountRaw)
     }
 }

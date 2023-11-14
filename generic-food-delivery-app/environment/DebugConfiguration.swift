@@ -7,5 +7,4 @@
 
 import Foundation
 
-struct DebugConfiguration: ApplicationConfiguration {
-}
+struct DebugConfiguration: ApplicationConfiguration {}

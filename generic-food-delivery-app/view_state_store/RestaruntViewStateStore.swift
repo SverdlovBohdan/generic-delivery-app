@@ -11,12 +11,12 @@ enum RestarauntAction: CustomStringConvertible {
     case setProducts([ProductItem])
     case setError(String)
     case showProgress
-    
+
     var description: String {
         switch self {
-        case .setError(let error):
+        case let .setError(error):
             return "setError \(error.description)"
-        case .setProducts(let products):
+        case let .setProducts(products):
             return "setProducts \(products.count)"
         case .showProgress:
             return "showProgress"
@@ -26,23 +26,23 @@ enum RestarauntAction: CustomStringConvertible {
 
 struct RestarauntState {
     var products: [ProductItem] = []
-    var error: String? = nil
+    var error: String?
     var inProgress: Bool = true
-    
+
     var noProducts: Bool {
-        return products.isEmpty
+        products.isEmpty
     }
 }
 
 typealias RestarauntViewStateStore = ViewStateStore<RestarauntAction, RestarauntState>
 
-func retarauntReducer(state: inout RestarauntState, action: RestarauntAction) -> Void {
+func retarauntReducer(state: inout RestarauntState, action: RestarauntAction) {
     switch action {
-    case .setError(let error):
+    case let .setError(error):
         state.error = error
         state.inProgress = false
         state.products = []
-    case .setProducts(let products):
+    case let .setProducts(products):
         state.products = products
         state.error = nil
         state.inProgress = false
@@ -55,6 +55,6 @@ func retarauntReducer(state: inout RestarauntState, action: RestarauntAction) ->
 
 extension ViewStateStore where Action == RestarauntAction, State == RestarauntState {
     static func makeDefault() -> RestarauntViewStateStore {
-        return RestarauntViewStateStore(initialState: RestarauntState(), reducer: retarauntReducer)
+        RestarauntViewStateStore(initialState: RestarauntState(), reducer: retarauntReducer)
     }
 }

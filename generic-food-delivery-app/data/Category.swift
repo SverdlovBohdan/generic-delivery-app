@@ -1,5 +1,5 @@
 //
-//  Categories.swift
+//  Category.swift
 //  generic-food-delivery-app
 //
 //  Created by Bohdan Sverdlov on 11.11.2023.
@@ -12,10 +12,10 @@ struct Category: Decodable {
     var name: String
     var slug: String
     var children: [SubCategory]
-    
+
     enum CodingKeys: String, CodingKey {
         case name = "name_ua"
-        
+
         case id
         case slug
         case children

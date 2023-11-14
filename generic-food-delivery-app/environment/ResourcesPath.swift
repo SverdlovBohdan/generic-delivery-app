@@ -1,5 +1,5 @@
 //
-//  RemotePaths.swift
+//  ResourcesPath.swift
 //  generic-food-delivery-app
 //
 //  Created by Bohdan Sverdlov on 11.11.2023.

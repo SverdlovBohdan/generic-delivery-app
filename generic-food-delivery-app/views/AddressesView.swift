@@ -1,5 +1,5 @@
 //
-//  AdressView.swift
+//  AddressesView.swift
 //  generic-food-delivery-app
 //
 //  Created by Bohdan Sverdlov on 08.11.2023.
@@ -15,26 +15,27 @@ struct AddressesView: View {
     @State private var street: String = ""
     @State private var appartment: String = ""
     @State private var canAddNewAddress: Bool = true
-    
+
     typealias NewAddressCallback = (Customer.Address) -> Void
     let willAdd: NewAddressCallback?
-    
+
     typealias RemoveAddressCallback = (IndexSet) -> Void
     let willRemove: RemoveAddressCallback?
-    
+
     typealias ChangeDefaultAddressCallback = (Int) -> Void
     let willDefaultChange: ChangeDefaultAddressCallback?
-    
+
     init(addresses: [Customer.Address], editable: Bool = true, didAdd: NewAddressCallback? = nil,
          didRemove: RemoveAddressCallback? = nil,
-         didDefaultChange: ChangeDefaultAddressCallback? = nil) {
+         didDefaultChange: ChangeDefaultAddressCallback? = nil)
+    {
         self.addresses = addresses
         self.editable = editable
-        self.willAdd = didAdd
-        self.willRemove = didRemove
-        self.willDefaultChange = didDefaultChange
+        willAdd = didAdd
+        willRemove = didRemove
+        willDefaultChange = didDefaultChange
     }
-    
+
     var body: some View {
         Group {
             ForEach(addresses.indices, id: \.self) { idx in
@@ -56,12 +57,12 @@ struct AddressesView: View {
                 willRemove?(indexSet)
             })
             .animation(.easeOut, value: addresses)
-            
+
             if editable {
                 HStack {
                     TextField(String(localized: "Street"), text: $street)
                         .lineLimit(1)
-                    
+
                     TextField(String(localized: "Appartment"), text: $appartment)
                         .lineLimit(1)
                 }

@@ -1,5 +1,5 @@
 //
-//  Result+Custom.swift
+//  Result+Extension.swift
 //  generic-food-delivery-app
 //
 //  Created by Bohdan Sverdlov on 30.10.2023.
@@ -10,14 +10,14 @@ import Foundation
 extension Result {
     var isSuccess: Bool {
         switch self {
-        case .success(_):
+        case .success:
             return true
-        case .failure(_):
+        case .failure:
             return false
         }
     }
-    
+
     var isFailure: Bool {
-        return !isSuccess
+        !isSuccess
     }
 }

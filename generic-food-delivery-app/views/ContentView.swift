@@ -14,12 +14,12 @@ struct ContentView: View {
                 .tabItem {
                     Label("Menu", systemImage: "rectangle")
                 }
-            
+
             Text("1")
                 .tabItem {
                     Label("My order", systemImage: "rectangle")
                 }
-            
+
             AccountView()
                 .tabItem {
                     Label("Account", systemImage: "rectangle")

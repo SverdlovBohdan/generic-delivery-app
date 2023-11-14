@@ -10,6 +10,6 @@ import SwiftUI
 
 protocol ProductsProvider {
     typealias SideEffect = (Result<[ProductItem], RepositoryError>) -> Void
-    
+
     func getAvailableProducts(sideEffect: SideEffect) async -> Void
 }

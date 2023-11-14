@@ -20,6 +20,7 @@
 		0E1F3C2A2AFFDCE60009697A /* ProductItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F3C292AFFDCE60009697A /* ProductItem.swift */; };
 		0E1F3C2C2AFFDFBB0009697A /* ProductsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F3C2B2AFFDFBB0009697A /* ProductsRepository.swift */; };
 		0E1F3C2F2AFFED110009697A /* README.MD in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F3C2E2AFFED110009697A /* README.MD */; };
+		0E2B4F922B03B78E00AB9D91 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E2B4F912B03B78E00AB9D91 /* SDWebImageSwiftUI */; };
 		0E65576D2AEFE51B00CB4094 /* generic_food_delivery_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65576C2AEFE51B00CB4094 /* generic_food_delivery_appApp.swift */; };
 		0E65576F2AEFE51B00CB4094 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65576E2AEFE51B00CB4094 /* ContentView.swift */; };
 		0E6557712AEFE52200CB4094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6557702AEFE52200CB4094 /* Assets.xcassets */; };
@@ -42,6 +43,8 @@
 		0E830F572B0016A50002F354 /* ProductRowItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E830F562B0016A50002F354 /* ProductRowItemView.swift */; };
 		0E8D030A2B0249E60061D966 /* CategorySectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D03092B0249E60061D966 /* CategorySectionHeaderView.swift */; };
 		0E8D030C2B02607F0061D966 /* RestaruntViewStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D030B2B02607F0061D966 /* RestaruntViewStateStore.swift */; };
+		0E8D030F2B027EF50061D966 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D030E2B027EF50061D966 /* ProductView.swift */; };
+		0EA67FD42B02A8040084F48D /* ButtonSyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA67FD32B02A8040084F48D /* ButtonSyles.swift */; };
 		0EA6BACA2AFFCB3900F53963 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6BAC92AFFCB3900F53963 /* Category.swift */; };
 		0EA6BACC2AFFCC0C00F53963 /* CategoryDataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6BACB2AFFCC0C00F53963 /* CategoryDataGetter.swift */; };
 		0EA6BACE2AFFCCB900F53963 /* CategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6BACD2AFFCCB900F53963 /* CategoriesRepository.swift */; };
@@ -104,6 +107,8 @@
 		0E830F562B0016A50002F354 /* ProductRowItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRowItemView.swift; sourceTree = "<group>"; };
 		0E8D03092B0249E60061D966 /* CategorySectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionHeaderView.swift; sourceTree = "<group>"; };
 		0E8D030B2B02607F0061D966 /* RestaruntViewStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaruntViewStateStore.swift; sourceTree = "<group>"; };
+		0E8D030E2B027EF50061D966 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		0EA67FD32B02A8040084F48D /* ButtonSyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSyles.swift; sourceTree = "<group>"; };
 		0EA6BAC92AFFCB3900F53963 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		0EA6BACB2AFFCC0C00F53963 /* CategoryDataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataGetter.swift; sourceTree = "<group>"; };
 		0EA6BACD2AFFCCB900F53963 /* CategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesRepository.swift; sourceTree = "<group>"; };
@@ -118,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2B4F922B03B78E00AB9D91 /* SDWebImageSwiftUI in Frameworks */,
 				0E1F3C0B2AFFD2200009697A /* Swinject in Frameworks */,
 				0E1F3C112AFFD2460009697A /* Alamofire in Frameworks */,
 			);
@@ -230,6 +236,8 @@
 				0E1F3C272AFFD8490009697A /* RestarauntMenuView.swift */,
 				0E830F562B0016A50002F354 /* ProductRowItemView.swift */,
 				0E8D03092B0249E60061D966 /* CategorySectionHeaderView.swift */,
+				0E8D030E2B027EF50061D966 /* ProductView.swift */,
+				0EA67FD32B02A8040084F48D /* ButtonSyles.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 			packageProductDependencies = (
 				0E1F3C0A2AFFD2200009697A /* Swinject */,
 				0E1F3C102AFFD2460009697A /* Alamofire */,
+				0E2B4F912B03B78E00AB9D91 /* SDWebImageSwiftUI */,
 			);
 			productName = "generic-food-delivery-app";
 			productReference = 0E6557692AEFE51B00CB4094 /* generic-food-delivery-app.app */;
@@ -404,6 +413,7 @@
 				0E1F3C092AFFD2150009697A /* XCRemoteSwiftPackageReference "Swinject" */,
 				0E1F3C0F2AFFD2460009697A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0E1F3C182AFFD28E0009697A /* XCRemoteSwiftPackageReference "mockingbird" */,
+				0E2B4F902B03B78E00AB9D91 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 0E65576A2AEFE51B00CB4094 /* Products */;
 			projectDirPath = "";
@@ -455,6 +465,7 @@
 				0EA6BACA2AFFCB3900F53963 /* Category.swift in Sources */,
 				0E6557AD2AEFFD7700CB4094 /* AccountInteractor.swift in Sources */,
 				0EA6BACC2AFFCC0C00F53963 /* CategoryDataGetter.swift in Sources */,
+				0E8D030F2B027EF50061D966 /* ProductView.swift in Sources */,
 				0E6557A12AEFE9D700CB4094 /* Customer.swift in Sources */,
 				0E65579F2AEFE8A600CB4094 /* AccountView.swift in Sources */,
 				0E8D030C2B02607F0061D966 /* RestaruntViewStateStore.swift in Sources */,
@@ -463,6 +474,7 @@
 				0EA6BACE2AFFCCB900F53963 /* CategoriesRepository.swift in Sources */,
 				0E830F572B0016A50002F354 /* ProductRowItemView.swift in Sources */,
 				0E65576F2AEFE51B00CB4094 /* ContentView.swift in Sources */,
+				0EA67FD42B02A8040084F48D /* ButtonSyles.swift in Sources */,
 				0EA6BAD22AFFCEA000F53963 /* ApplicationConfiguration.swift in Sources */,
 				0E6557A92AEFF00F00CB4094 /* AccountViewStateStore.swift in Sources */,
 				0E1F3C222AFFD4F60009697A /* RemotePathProvider.swift in Sources */,
@@ -835,6 +847,14 @@
 				minimumVersion = 0.20.0;
 			};
 		};
+		0E2B4F902B03B78E00AB9D91 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -857,6 +877,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E1F3C182AFFD28E0009697A /* XCRemoteSwiftPackageReference "mockingbird" */;
 			productName = Mockingbird;
+		};
+		0E2B4F912B03B78E00AB9D91 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E2B4F902B03B78E00AB9D91 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

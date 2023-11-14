@@ -1,5 +1,5 @@
 //
-//  RestarauntMenu.swift
+//  RestarauntMenuView.swift
 //  generic-food-delivery-app
 //
 //  Created by Bohdan Sverdlov on 11.11.2023.
@@ -8,33 +8,31 @@
 import SwiftUI
 
 struct RestarauntMenuView: View {
-    //TODO: Use DI
+    // TODO: Use DI
     private var restaraunt: ProductsProvider = Restaraunt.shared
     private var categoryData: CategoryDataGetter = Restaraunt.shared
-    
+
     @State private var viewState: RestarauntViewStateStore = .makeDefault()
-    
-    private let rows = Array<GridItem>(repeating: GridItem(.flexible()), count: 3)
-    
+
+    private let rows = [GridItem](repeating: GridItem(.flexible()), count: 3)
+
     private var groupedProductsByCategories: [Int: [ProductItem]] {
         Dictionary(grouping: viewState.products, by: \.category.id)
     }
-    
+
     private var categoriesIds: [Int] {
-        Array<Int>(groupedProductsByCategories.keys).sorted()
+        [Int](groupedProductsByCategories.keys).sorted()
     }
-    
-    private let progressTitle: String = String("🤤 ") + String(localized: "Looking a menu")
-    private let errorTitle: String = String("😐 ") + String(localized: "Crap! We have an error")
-    
+
+    private let progressTitle: String = .init("🤤 ") + String(localized: "Looking a menu")
+    private let errorTitle: String = .init("😐 ") + String(localized: "Crap! We have an error")
+
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 LazyVStack(pinnedViews: .sectionHeaders) {
-                    
                     ForEach(categoriesIds, id: \.self) { categoryId in
                         Section(header: CategorySectionHeaderView(categoryId: categoryId)) {
-                            
                             ScrollView(.horizontal, showsIndicators: false) {
                                 LazyHGrid(rows: rows) {
                                     ForEach(groupedProductsByCategories[categoryId]!, id: \.id) { product in
@@ -59,7 +57,7 @@ struct RestarauntMenuView: View {
                         Text(errorTitle)
                             .font(.subheadline)
                         Text(error)
-                        
+
                         Button(String(localized: "Try againt")) {
                             viewState.dispatch(action: .showProgress)
                             Task { @MainActor in
@@ -78,13 +76,13 @@ struct RestarauntMenuView: View {
             }
         }
     }
-    
+
     private func getProducts() async {
-        return await restaraunt.getAvailableProducts { productsResult in
+        await restaraunt.getAvailableProducts { productsResult in
             switch productsResult {
-            case .success(let availableProduts):
+            case let .success(availableProduts):
                 viewState.dispatch(action: .setProducts(availableProduts))
-            case .failure(let productsError):
+            case let .failure(productsError):
                 viewState.dispatch(action: .setError(productsError.localizedDescription))
             }
         }

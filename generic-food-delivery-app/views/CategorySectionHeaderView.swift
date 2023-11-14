@@ -9,16 +9,16 @@ import SwiftUI
 
 struct CategorySectionHeaderView: View {
     var categoryId: Int
-    
-    //TODO: Use DI
+
+    // TODO: Use DI
     private var categoryData: CategoryDataGetter = Restaraunt.shared
-    
+
     @State private var name: String = ""
-    
+
     init(categoryId: Int) {
         self.categoryId = categoryId
     }
-    
+
     var body: some View {
         HStack {
             Text(categoryData.getEmoji(id: categoryId))
@@ -30,7 +30,7 @@ struct CategorySectionHeaderView: View {
                 .overlay {
                     Capsule().stroke(
                         Color.gray.opacity(0.05))
-                    .shadow(radius: 6)
+                        .shadow(radius: 6)
                 }
             Spacer()
         }
