@@ -10,7 +10,7 @@ import Foundation
 enum OrderAction: CustomStringConvertible {
     case removeProduct(IndexSet)
     case setOrder([ShoppingCartItem])
-    
+
     var description: String {
         switch self {
         case .removeProduct:
@@ -23,7 +23,7 @@ enum OrderAction: CustomStringConvertible {
 //            return "showSendingView"
 //        case .setError(_):
 //            return "setError"
-        case .setOrder(_):
+        case .setOrder:
             return "setOrder"
         }
     }
@@ -33,20 +33,20 @@ struct OrderState {
     var items: [ShoppingCartItem] = []
     var isValid: Bool = false
     var isSendingToRestaraunt: Bool = false
-    var error: String? = nil
+    var error: String?
 }
 
 typealias OrderStore = ViewStateStore<OrderAction,
-                                      OrderState>
+    OrderState>
 
 func orderReducer(currentState: inout OrderState,
                   action: OrderAction)
 {
     switch action {
-    case .removeProduct(let indexSet):
+    case let .removeProduct(indexSet):
         currentState.items.remove(atOffsets: indexSet)
         currentState.isValid = !currentState.items.isEmpty
-    case .setOrder(let cartItems):
+    case let .setOrder(cartItems):
         currentState.items = cartItems
         currentState.isValid = !currentState.items.isEmpty
     }
@@ -54,6 +54,6 @@ func orderReducer(currentState: inout OrderState,
 
 extension ViewStateStore where State == OrderState, Action == OrderAction {
     static func makeDefault() -> OrderStore {
-        return OrderStore(initialState: .init(), reducer: orderReducer)
+        OrderStore(initialState: .init(), reducer: orderReducer)
     }
 }

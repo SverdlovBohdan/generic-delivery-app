@@ -14,7 +14,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Menu", systemImage: "rectangle")
                 }
-            
+
             NavigationStack {
                 UserDataView { accountViewState in
                     AccountView(viewState: accountViewState, editable: false)
@@ -25,7 +25,7 @@ struct ContentView: View {
             .tabItem {
                 Label("My order", systemImage: "rectangle")
             }
-            
+
             NavigationStack {
                 UserDataView { accountViewState in
                     AccountView(viewState: accountViewState, editable: true)

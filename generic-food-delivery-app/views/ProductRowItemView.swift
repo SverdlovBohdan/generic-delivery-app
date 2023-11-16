@@ -11,22 +11,22 @@ import SwiftUI
 struct ProductRowItemView: View {
     var product: ProductItem
     private var presentingInOrder: Bool
-    
+
     // TODO: Use DI
     private var shoppingCart: ShoppingCartInteractor = Restaraunt.shared
 
     @Environment(NavigationStore.self) private var navigation: NavigationStore
-    
+
     private var imageWidth: CGFloat = 60.0
 
     init(product: ProductItem) {
         self.product = product
-        self.presentingInOrder = false
+        presentingInOrder = false
     }
-    
+
     init(shoppingCartItem: ShoppingCartItem) {
-        self.product = shoppingCartItem.product
-        self.presentingInOrder = true
+        product = shoppingCartItem.product
+        presentingInOrder = true
     }
 
     var body: some View {

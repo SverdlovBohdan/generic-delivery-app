@@ -45,10 +45,10 @@ func navigationReducer(currentState: inout NavigationState,
 
 extension ViewStateStore where State == NavigationState, Action == NavigationAction {
     static var shared: NavigationStore {
-        return NavigationStore(initialState: .init(), reducer: navigationReducer)
+        NavigationStore(initialState: .init(), reducer: navigationReducer)
     }
 
     static func makeDefault() -> NavigationStore {
-        return NavigationStore(initialState: .init(), reducer: navigationReducer)
+        NavigationStore(initialState: .init(), reducer: navigationReducer)
     }
 }

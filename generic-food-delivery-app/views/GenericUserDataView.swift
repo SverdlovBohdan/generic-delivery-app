@@ -9,28 +9,29 @@ import SwiftUI
 
 struct GenericUserDataView<AccountViewType: View, OrderViewType: View>: View {
     @State private var viewState: AccountViewStateStore = .makeDefault()
-    
+
     // TODO: Use DI
     private var accountRepository: AccountRepository = AccountUserDefaults()
-    
+
     private var accountSection: ((Bindable<AccountViewStateStore>) -> AccountViewType)?
     private var orderSection: (() -> OrderViewType)?
-    
+
     // TODO: Use @ViewBuilder?
     init(accountSection: ((Bindable<AccountViewStateStore>) -> AccountViewType)? = nil,
-         orderSection: (() -> OrderViewType)? = nil) {
+         orderSection: (() -> OrderViewType)? = nil)
+    {
         self.accountSection = accountSection
         self.orderSection = orderSection
     }
-    
+
     var body: some View {
         List {
             @Bindable var accountState = viewState
-            if let accountSection = accountSection {
+            if let accountSection {
                 accountSection($accountState)
             }
-            
-            if let orderSection = orderSection {
+
+            if let orderSection {
                 orderSection()
             }
         }
@@ -48,7 +49,7 @@ struct GenericUserDataView<AccountViewType: View, OrderViewType: View>: View {
             }
         }
     }
-    
+
     private var canUpdateAccount: Bool {
         viewState.isValid ?? false
     }

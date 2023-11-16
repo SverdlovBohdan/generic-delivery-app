@@ -8,7 +8,6 @@
 import Foundation
 
 class Restaraunt: ProductsCatalog, CategoryDataGetter, ShoppingCartInteractor {
-    
     // TODO: Use DI
     private var categoriesRepository: CategoriesRepository = RestarauntRepository()
     private var productsRepository: ProductsRepository = RestarauntRepository()
@@ -16,19 +15,19 @@ class Restaraunt: ProductsCatalog, CategoryDataGetter, ShoppingCartInteractor {
 
     @MainActor
     private var categoriesCache: [Category] = []
-    
-    func getOrder(sideEffect: ([ShoppingCartItem]) -> Void) -> Void {
+
+    func getOrder(sideEffect: ([ShoppingCartItem]) -> Void) {
         sideEffect(orderRepository.read())
     }
-    
+
     func addToCart(product: ProductItem, sideEffect: ([ShoppingCartItem]) -> Void) {
         var order = orderRepository.read()
         order.append(.init(id: UUID(), product: product))
         orderRepository.write(order: order)
-        
+
         sideEffect(order)
     }
-    
+
     func removeFromCart(item: ShoppingCartItem, sideEffect: ([ShoppingCartItem]) -> Void) {
         var order = orderRepository.read()
         order.removeAll { item in
