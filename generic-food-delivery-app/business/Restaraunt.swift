@@ -28,10 +28,10 @@ class Restaraunt: ProductsCatalog, CategoryDataGetter, ShoppingCartInteractor {
         sideEffect(order)
     }
 
-    func removeFromCart(item: ShoppingCartItem, sideEffect: ([ShoppingCartItem]) -> Void) {
+    func removeFromCart(shoppingCartItem: ShoppingCartItem, sideEffect: ([ShoppingCartItem]) -> Void) {
         var order = orderRepository.read()
         order.removeAll { item in
-            item.id == item.id
+            item.id == shoppingCartItem.id
         }
         orderRepository.write(order: order)
 

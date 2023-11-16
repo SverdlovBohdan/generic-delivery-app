@@ -8,50 +8,56 @@
 import SwiftUI
 
 struct GenericUserDataView<AccountViewType: View, OrderViewType: View>: View {
-    @State private var viewState: AccountViewStateStore = .makeDefault()
-
+    @State private var accountViewState: AccountViewStateStore = .makeDefault()
+    @State private var orderViewState: OrderViewStateStore = .makeDefault()
+    
     // TODO: Use DI
     private var accountRepository: AccountRepository = AccountUserDefaults()
-
+    
     private var accountSection: ((Bindable<AccountViewStateStore>) -> AccountViewType)?
-    private var orderSection: (() -> OrderViewType)?
-
+    private var orderSection: ((Bindable<OrderViewStateStore>) -> OrderViewType)?
+    
     // TODO: Use @ViewBuilder?
     init(accountSection: ((Bindable<AccountViewStateStore>) -> AccountViewType)? = nil,
-         orderSection: (() -> OrderViewType)? = nil)
+         orderSection: ((Bindable<OrderViewStateStore>) -> OrderViewType)? = nil)
     {
         self.accountSection = accountSection
         self.orderSection = orderSection
     }
-
+    
     var body: some View {
-        List {
-            @Bindable var accountState = viewState
-            if let accountSection {
-                accountSection($accountState)
+        Form {
+            List {
+                @Bindable var accountState = accountViewState
+                if let accountSection {
+                    accountSection($accountState)
+                        .animation(.easeIn, value: accountViewState.error)
+                }
             }
-
-            if let orderSection {
-                orderSection()
+            
+            List {
+                @Bindable var orderState = orderViewState
+                if let orderSection {
+                    orderSection($orderState)
+                }
             }
         }
-        .animation(.easeIn, value: viewState.error)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button(String(localized: "Update")) {
-                    accountRepository.write(account: Customer(name: viewState.name,
-                                                              phone: viewState.phone,
-                                                              paymentMethod: viewState.paymentMethod,
-                                                              addresses: viewState.addresses))
-                    viewState.dispatch(action: .setValidationStatus(false))
+                    accountRepository.write(account: Customer(name: accountViewState.name,
+                                                              phone: accountViewState.phone,
+                                                              paymentMethod: accountViewState.paymentMethod,
+                                                              addresses: accountViewState.addresses))
+                    accountViewState.dispatch(action: .setValidationStatus(false))
                 }
                 .disabled(!canUpdateAccount)
             }
         }
     }
-
+    
     private var canUpdateAccount: Bool {
-        viewState.isValid ?? false
+        accountViewState.isValid ?? false
     }
 }
 

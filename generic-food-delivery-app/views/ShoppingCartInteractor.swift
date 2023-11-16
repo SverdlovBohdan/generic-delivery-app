@@ -11,6 +11,6 @@ protocol ShoppingCartInteractor {
     typealias SideEffect = ([ShoppingCartItem]) -> Void
 
     func addToCart(product: ProductItem, sideEffect: SideEffect) -> Void
-    func removeFromCart(item: ShoppingCartItem, sideEffect: SideEffect) -> Void
+    func removeFromCart(shoppingCartItem: ShoppingCartItem, sideEffect: SideEffect) -> Void
     func getOrder(sideEffect: SideEffect) -> Void
 }

@@ -8,13 +8,13 @@
 import Foundation
 
 enum OrderAction: CustomStringConvertible {
-    case removeProduct(IndexSet)
     case setOrder([ShoppingCartItem])
+    case removeItem(Int)
 
     var description: String {
         switch self {
-        case .removeProduct:
-            return "removeProduct"
+        case .removeItem(_):
+            return "removeItem"
 //        case .resetOrder:
 //            return "resetOrder"
 //        case .setValidationStatus:
@@ -31,29 +31,36 @@ enum OrderAction: CustomStringConvertible {
 
 struct OrderState {
     var items: [ShoppingCartItem] = []
-    var isValid: Bool = false
     var isSendingToRestaraunt: Bool = false
     var error: String?
+    
+    var total: Float {
+        items.reduce(.zero, { totalCost, item in
+            return totalCost + item.product.price
+        })
+    }
+    
+    var isValid: Bool {
+        return !items.isEmpty
+    }
 }
 
-typealias OrderStore = ViewStateStore<OrderAction,
+typealias OrderViewStateStore = ViewStateStore<OrderAction,
     OrderState>
 
 func orderReducer(currentState: inout OrderState,
                   action: OrderAction)
 {
     switch action {
-    case let .removeProduct(indexSet):
-        currentState.items.remove(atOffsets: indexSet)
-        currentState.isValid = !currentState.items.isEmpty
     case let .setOrder(cartItems):
         currentState.items = cartItems
-        currentState.isValid = !currentState.items.isEmpty
+    case let .removeItem(index):
+        currentState.items.remove(at: index)
     }
 }
 
 extension ViewStateStore where State == OrderState, Action == OrderAction {
-    static func makeDefault() -> OrderStore {
-        OrderStore(initialState: .init(), reducer: orderReducer)
+    static func makeDefault() -> OrderViewStateStore {
+        OrderViewStateStore(initialState: .init(), reducer: orderReducer)
     }
 }

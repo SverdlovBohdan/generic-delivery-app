@@ -46,7 +46,9 @@ struct ProductView: View {
                     Group {
                         Text(product.name)
                             .font(.title)
+                            .lineLimit(1)
                         Text(categoryName)
+                            .lineLimit(1)
                             .font(.subheadline)
                     }
                     .foregroundStyle(.white)

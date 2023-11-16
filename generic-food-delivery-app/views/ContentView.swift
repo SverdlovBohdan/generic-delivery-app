@@ -18,8 +18,8 @@ struct ContentView: View {
             NavigationStack {
                 UserDataView { accountViewState in
                     AccountView(viewState: accountViewState, editable: false)
-                } orderSection: {
-                    OrderView()
+                } orderSection: { orderViewState in
+                    OrderView(viewState: orderViewState)
                 }
             }
             .tabItem {
