@@ -9,4 +9,5 @@ import Foundation
 
 enum UserDefaultsNames {
     static let accountKey: String = "account_db"
+    static let orderKey: String = "order_db"
 }

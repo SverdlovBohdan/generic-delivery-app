@@ -10,13 +10,23 @@ import SwiftUI
 
 struct ProductRowItemView: View {
     var product: ProductItem
+    private var presentingInOrder: Bool
+    
+    // TODO: Use DI
+    private var shoppingCart: ShoppingCartInteractor = Restaraunt.shared
 
     @Environment(NavigationStore.self) private var navigation: NavigationStore
-
+    
     private var imageWidth: CGFloat = 60.0
 
     init(product: ProductItem) {
         self.product = product
+        self.presentingInOrder = false
+    }
+    
+    init(shoppingCartItem: ShoppingCartItem) {
+        self.product = shoppingCartItem.product
+        self.presentingInOrder = true
     }
 
     var body: some View {
@@ -38,18 +48,27 @@ struct ProductRowItemView: View {
                 .frame(width: imageWidth * 3)
             }
             .onTapGesture {
-                navigation.dispatch(action: .openProductView(product))
+                if !presentingInOrder {
+                    navigation.dispatch(action: .openProductView(product))
+                }
             }
 
             Spacer()
 
-            Button(action: {}, label: {
-                HStack {
-                    Text(String(format: "%.2f", product.price))
-                    Image(systemName: "basket")
-                }
-            })
-            .buttonStyle(GrowingButton(clipShape: Capsule()))
+            if !presentingInOrder {
+                Button(action: {
+                    shoppingCart.addToCart(product: product) { _ in
+                    }
+                }, label: {
+                    HStack {
+                        Text(String(format: "%.2f", product.price))
+                        Image(systemName: "basket")
+                    }
+                })
+                .buttonStyle(GrowingButton(clipShape: Capsule()))
+            } else {
+                Text(String(format: "%.2f", product.price))
+            }
         }
     }
 }

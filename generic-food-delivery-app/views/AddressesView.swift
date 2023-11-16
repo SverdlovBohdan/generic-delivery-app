@@ -55,34 +55,32 @@ struct AddressesView: View {
     }
     
     var body: some View {
-        Group {
-            if editable {
-                addressesList
-                    .onDelete(perform: { indexSet in
-                        willRemove?(indexSet)
-                    })
-                    .animation(.easeOut, value: addresses)
-            } else {
-                addressesList
-                    .animation(.easeOut, value: addresses)
+        if editable {
+            addressesList
+                .onDelete(perform: { indexSet in
+                    willRemove?(indexSet)
+                })
+                .animation(.easeOut, value: addresses)
+        } else {
+            addressesList
+                .animation(.easeOut, value: addresses)
+        }
+        
+        if editable {
+            HStack {
+                TextField(String(localized: "Street"), text: $street)
+                    .lineLimit(1)
+                
+                TextField(String(localized: "Appartment"), text: $appartment)
+                    .lineLimit(1)
             }
             
-            if editable {
-                HStack {
-                    TextField(String(localized: "Street"), text: $street)
-                        .lineLimit(1)
-                    
-                    TextField(String(localized: "Appartment"), text: $appartment)
-                        .lineLimit(1)
-                }
-                
-                Button(String(localized: "Add address")) {
-                    willAdd?(.init(street: street, appartment: appartment))
-                    street.removeAll()
-                    appartment.removeAll()
-                }
-                .disabled(street.isEmpty)
+            Button(String(localized: "Add address")) {
+                willAdd?(.init(street: street, appartment: appartment))
+                street.removeAll()
+                appartment.removeAll()
             }
+            .disabled(street.isEmpty)
         }
     }
 }

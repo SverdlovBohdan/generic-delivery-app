@@ -15,6 +15,7 @@ struct ProductView: View {
 
     // TODO: Use DI
     private var categoryData: CategoryDataGetter = Restaraunt.shared
+    private var shoppingCart: ShoppingCartInteractor = Restaraunt.shared
 
     @State private var categoryName: String = ""
 
@@ -50,7 +51,10 @@ struct ProductView: View {
                     }
                     .foregroundStyle(.white)
 
-                    Button(action: {}, label: {
+                    Button(action: {
+                        shoppingCart.addToCart(product: product) { _ in
+                        }
+                    }, label: {
                         HStack {
                             Text(String(format: "%.2f", product.price))
                                 .font(.title2)

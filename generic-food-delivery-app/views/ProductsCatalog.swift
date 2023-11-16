@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-protocol ProductsProvider {
+protocol ProductsCatalog {
     typealias SideEffect = (Result<[ProductItem], RepositoryError>) -> Void
 
     func getAvailableProducts(sideEffect: SideEffect) async -> Void

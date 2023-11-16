@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RestarauntMenuView: View {
     // TODO: Use DI
-    private var restaraunt: ProductsProvider = Restaraunt.shared
+    private var restaraunt: ProductsCatalog = Restaraunt.shared
     private var categoryData: CategoryDataGetter = Restaraunt.shared
 
     @Environment(NavigationStore.self) private var navigation: NavigationStore

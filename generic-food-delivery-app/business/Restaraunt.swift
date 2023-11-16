@@ -7,16 +7,40 @@
 
 import Foundation
 
-class Restaraunt: ProductsProvider, CategoryDataGetter {
+class Restaraunt: ProductsCatalog, CategoryDataGetter, ShoppingCartInteractor {
+    
     // TODO: Use DI
     private var categoriesRepository: CategoriesRepository = RestarauntRepository()
     private var productsRepository: ProductsRepository = RestarauntRepository()
+    private var orderRepository: OrderRepository = OrderUserDefaults()
 
     @MainActor
     private var categoriesCache: [Category] = []
+    
+    func getOrder(sideEffect: ([ShoppingCartItem]) -> Void) -> Void {
+        sideEffect(orderRepository.read())
+    }
+    
+    func addToCart(product: ProductItem, sideEffect: ([ShoppingCartItem]) -> Void) {
+        var order = orderRepository.read()
+        order.append(.init(id: UUID(), product: product))
+        orderRepository.write(order: order)
+        
+        sideEffect(order)
+    }
+    
+    func removeFromCart(item: ShoppingCartItem, sideEffect: ([ShoppingCartItem]) -> Void) {
+        var order = orderRepository.read()
+        order.removeAll { item in
+            item.id == item.id
+        }
+        orderRepository.write(order: order)
+
+        sideEffect(order)
+    }
 
     @MainActor
-    func getAvailableProducts(sideEffect: ProductsProvider.SideEffect) async {
+    func getAvailableProducts(sideEffect: ProductsCatalog.SideEffect) async {
         let result = await categoriesRepository.getCategories()
 
         switch result {
