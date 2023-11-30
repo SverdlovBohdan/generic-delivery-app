@@ -27,8 +27,8 @@ struct GrowingButton<ClippedShape: Shape>: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], leadingTrailingPadding)
-            .padding([.top, .bottom], topBottomPadding)
+            .padding(.horizontal, leadingTrailingPadding)
+            .padding(.vertical, topBottomPadding)
             .background(backgroundColor)
             .foregroundStyle(foregroundColor)
             .clipShape(clipShape)

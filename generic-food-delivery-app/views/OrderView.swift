@@ -45,6 +45,7 @@ struct OrderView: View {
                     Text(String(localized: "Make order"))
                     Spacer()
                     Text(String(format: "%.2f", viewState.viewState.total) + String("₴"))
+                        .font(.title3)
                 }
             })
             .disabled(!viewState.viewState.isValid)
@@ -54,7 +55,7 @@ struct OrderView: View {
 
 #Preview {
     NavigationStack {
-        List {
+        Form {
             OrderView(viewState: .init(.makeDefault()))
         }
     }

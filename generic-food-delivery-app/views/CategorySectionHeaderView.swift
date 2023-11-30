@@ -23,15 +23,10 @@ struct CategorySectionHeaderView: View {
         HStack {
             Text(categoryData.getEmoji(id: categoryId))
             Text(name)
-                .padding([.leading, .trailing], 8)
-                .padding([.top, .bottom], 4)
-                .background(Color.gray.opacity(0.05))
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(.ultraThinMaterial)
                 .clipShape(Capsule())
-                .overlay {
-                    Capsule().stroke(
-                        Color.gray.opacity(0.05))
-                        .shadow(radius: 6)
-                }
             Spacer()
         }
         .font(.title)

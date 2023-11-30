@@ -149,6 +149,8 @@ struct AccountView: View {
 
 #Preview {
     NavigationStack {
-        AccountView(viewState: .init(AccountViewStateStore.makeDefault()), editable: true)
+        Form {
+            AccountView(viewState: .init(AccountViewStateStore.makeDefault()), editable: true)
+        }
     }
 }
