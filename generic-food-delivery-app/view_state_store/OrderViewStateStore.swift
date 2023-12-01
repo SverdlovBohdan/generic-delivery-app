@@ -10,11 +10,14 @@ import Foundation
 enum OrderAction: CustomStringConvertible {
     case setOrder([ShoppingCartItem])
     case removeItem(Int)
+    case reset
 
     var description: String {
         switch self {
-        case .removeItem(_):
+        case .removeItem:
             return "removeItem"
+        case .reset:
+            return "reset"
 //        case .resetOrder:
 //            return "resetOrder"
 //        case .setValidationStatus:
@@ -33,15 +36,15 @@ struct OrderState {
     var items: [ShoppingCartItem] = []
     var isSendingToRestaraunt: Bool = false
     var error: String?
-    
+
     var total: Float {
-        items.reduce(.zero, { totalCost, item in
-            return totalCost + item.product.price
-        })
+        items.reduce(.zero) { totalCost, item in
+            totalCost + item.product.price
+        }
     }
-    
+
     var isValid: Bool {
-        return !items.isEmpty
+        !items.isEmpty
     }
 }
 
@@ -56,6 +59,8 @@ func orderReducer(currentState: inout OrderState,
         currentState.items = cartItems
     case let .removeItem(index):
         currentState.items.remove(at: index)
+    case .reset:
+        currentState = .init()
     }
 }
 

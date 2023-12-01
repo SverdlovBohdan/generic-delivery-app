@@ -78,6 +78,7 @@ struct ProductView: View {
                         .foregroundStyle(.white.opacity(0.5))
                         .padding()
                 }
+                .frame(height: geometry.size.height * 0.45)
 
                 Text(product.description)
                     .font(.headline)
@@ -111,10 +112,8 @@ struct ProductView: View {
 }
 
 #Preview {
-    TabView {
-        NavigationStack {
-            ProductView(product: .preview)
-                .environment(NavigationStore.makeDefault())
-        }
+    NavigationStack {
+        ProductView(product: .preview)
+            .environment(NavigationStore.makeDefault())
     }
 }

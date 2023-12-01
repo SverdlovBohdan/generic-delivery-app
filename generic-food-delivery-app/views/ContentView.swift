@@ -8,31 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(NavigationStore.self) private var navigation: NavigationStore
+
+    private var navigationPathBinding: Binding<NavigationPath> {
+        .init {
+            navigation.path
+        } set: { newValue in
+            navigation.path = newValue
+        }
+    }
+
     var body: some View {
-        TabView {
-            RestarauntMenuView()
-                .tabItem {
-                    Label("Menu", systemImage: "rectangle")
-                }
+        NavigationStack(path: navigationPathBinding) {
+            TabView {
+                RestarauntMenuView()
+                    .tabItem {
+                        Label("Menu", systemImage: "rectangle")
+                    }
 
-            NavigationStack {
                 UserDataView { accountViewState in
-                    AccountView(viewState: accountViewState, editable: false)
+                    AccountSectionView(viewState: accountViewState, editable: false)
                 } orderSection: { orderViewState in
-                    OrderView(viewState: orderViewState)
+                    OrderSectionView(viewState: orderViewState)
                 }
-            }
-            .tabItem {
-                Label("My order", systemImage: "rectangle")
-            }
+                .tabItem {
+                    Label("My order", systemImage: "rectangle")
+                }
 
-            NavigationStack {
                 UserDataView { accountViewState in
-                    AccountView(viewState: accountViewState, editable: true)
+                    AccountSectionView(viewState: accountViewState, editable: true)
                 }
-            }
-            .tabItem {
-                Label("Account", systemImage: "rectangle")
+                .tabItem {
+                    Label("Account", systemImage: "rectangle")
+                }
             }
         }
     }

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct OrderView: View {
+struct OrderSectionView: View {
     // TODO: Use DI
     private var shoppingCart: ShoppingCartInteractor = Restaraunt.shared
 
     @Bindable private var viewState: OrderViewStateStore
-    
+
     init(viewState: Bindable<OrderViewStateStore>) {
         self._viewState = viewState
     }
@@ -29,34 +29,22 @@ struct OrderView: View {
                 }
             })
         } header: {
-            Text(String(localized: "🍱 Order"))
+            HStack {
+                Text(String(localized: "🍱 Order"))
+                Spacer()
+                Label(String(localized: "remove"), systemImage: "hand.point.up.left.and.text")
+            }
         }
         .onAppear(perform: {
             shoppingCart.getOrder { shoppingCartItems in
                 viewState.dispatch(action: .setOrder(shoppingCartItems))
             }
         })
-        
-        Section {
-            Button(action: {
-                print("### Make order button")
-            }, label: {
-                HStack {
-                    Text(String(localized: "Make order"))
-                    Spacer()
-                    Text(String(format: "%.2f", viewState.viewState.total) + String("₴"))
-                        .font(.title3)
-                }
-            })
-            .disabled(!viewState.viewState.isValid)
-        }
     }
 }
 
 #Preview {
-    NavigationStack {
-        Form {
-            OrderView(viewState: .init(.makeDefault()))
-        }
+    Form {
+        OrderSectionView(viewState: .init(.makeDefault()))
     }
 }

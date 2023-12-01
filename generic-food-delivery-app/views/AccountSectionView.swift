@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AccountView: View {
+struct AccountSectionView: View {
     @Bindable private var viewState: AccountViewStateStore
     let editable: Bool
 
@@ -150,7 +150,7 @@ struct AccountView: View {
 #Preview {
     NavigationStack {
         Form {
-            AccountView(viewState: .init(AccountViewStateStore.makeDefault()), editable: true)
+            AccountSectionView(viewState: .init(AccountViewStateStore.makeDefault()), editable: true)
         }
     }
 }

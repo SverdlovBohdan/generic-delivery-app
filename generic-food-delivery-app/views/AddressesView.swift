@@ -55,15 +55,17 @@ struct AddressesView: View {
     }
 
     var body: some View {
-        if editable {
-            addressesList
-                .onDelete(perform: { indexSet in
-                    willRemove?(indexSet)
-                })
-                .animation(.easeOut, value: addresses)
-        } else {
-            addressesList
-                .animation(.easeOut, value: addresses)
+        List {
+            if editable {
+                addressesList
+                    .onDelete(perform: { indexSet in
+                        willRemove?(indexSet)
+                    })
+                    .animation(.easeOut, value: addresses)
+            } else {
+                addressesList
+                    .animation(.easeOut, value: addresses)
+            }
         }
 
         if editable {
