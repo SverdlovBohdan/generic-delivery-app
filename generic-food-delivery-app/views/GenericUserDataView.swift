@@ -57,7 +57,7 @@ struct GenericUserDataView<AccountViewType: View, OrderViewType: View>: View {
                                 .font(.title3)
                         }
                     })
-                    .disabled(!orderViewState.viewState.isValid)
+                    .disabled(!orderViewState.viewState.isValid || !isAccountDataFull)
                 }
             }
         }
@@ -65,6 +65,10 @@ struct GenericUserDataView<AccountViewType: View, OrderViewType: View>: View {
 
     private var canUpdateAccount: Bool {
         accountViewState.isValid ?? false
+    }
+    
+    private var isAccountDataFull: Bool {
+        accountViewState.error == nil
     }
 }
 

@@ -23,7 +23,7 @@ struct ContentView: View {
             TabView {
                 RestarauntMenuView()
                     .tabItem {
-                        Label("Menu", systemImage: "rectangle")
+                        Label("Menu", systemImage: "heart.text.square")
                     }
 
                 UserDataView { accountViewState in
@@ -32,14 +32,14 @@ struct ContentView: View {
                     OrderSectionView(viewState: orderViewState)
                 }
                 .tabItem {
-                    Label("My order", systemImage: "rectangle")
+                    Label("My order", systemImage: "basket")
                 }
 
                 UserDataView { accountViewState in
                     AccountSectionView(viewState: accountViewState, editable: true)
                 }
                 .tabItem {
-                    Label("Account", systemImage: "rectangle")
+                    Label("Account", systemImage: "person")
                 }
             }
         }

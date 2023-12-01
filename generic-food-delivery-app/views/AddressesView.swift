@@ -61,10 +61,8 @@ struct AddressesView: View {
                     .onDelete(perform: { indexSet in
                         willRemove?(indexSet)
                     })
-                    .animation(.easeOut, value: addresses)
             } else {
                 addressesList
-                    .animation(.easeOut, value: addresses)
             }
         }
 
