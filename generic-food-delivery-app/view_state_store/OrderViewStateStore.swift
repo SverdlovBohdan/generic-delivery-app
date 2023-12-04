@@ -15,9 +15,9 @@ enum OrderAction: CustomStringConvertible {
     var description: String {
         switch self {
         case .removeItem:
-            return "removeItem"
+            "removeItem"
         case .reset:
-            return "reset"
+            "reset"
 //        case .resetOrder:
 //            return "resetOrder"
 //        case .setValidationStatus:
@@ -27,7 +27,7 @@ enum OrderAction: CustomStringConvertible {
 //        case .setError(_):
 //            return "setError"
         case .setOrder:
-            return "setOrder"
+            "setOrder"
         }
     }
 }

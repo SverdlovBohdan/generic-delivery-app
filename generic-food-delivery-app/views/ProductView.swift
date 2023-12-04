@@ -21,6 +21,11 @@ struct ProductView: View {
 
     private let imageWidth: CGFloat = 120
 
+    private struct ChevronAnimationValues {
+        var yOffset: CGFloat = 0.0
+        var opacity: CGFloat = 1.0
+    }
+
     init(product: ProductItem) {
         self.product = product
     }
@@ -77,6 +82,18 @@ struct ProductView: View {
                         .frame(width: imageWidth * 0.25)
                         .foregroundStyle(.white.opacity(0.5))
                         .padding()
+                        .keyframeAnimator(initialValue: ChevronAnimationValues(), repeating: true) { content, values in
+                            content.offset(y: values.yOffset)
+                                .opacity(values.opacity)
+                        } keyframes: { _ in
+                            KeyframeTrack(\.yOffset) {
+                                SpringKeyframe(4.0, duration: 1.0)
+                            }
+
+                            KeyframeTrack(\.opacity) {
+                                LinearKeyframe(0.0, duration: 0.8)
+                            }
+                        }
                 }
                 .frame(height: geometry.size.height * 0.45)
 

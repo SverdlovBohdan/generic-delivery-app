@@ -15,11 +15,11 @@ enum RestarauntAction: CustomStringConvertible {
     var description: String {
         switch self {
         case let .setError(error):
-            return "setError \(error.description)"
+            "setError \(error.description)"
         case let .setProducts(products):
-            return "setProducts \(products.count)"
+            "setProducts \(products.count)"
         case .showProgress:
-            return "showProgress"
+            "showProgress"
         }
     }
 }

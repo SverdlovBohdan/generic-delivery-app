@@ -19,40 +19,40 @@ struct ProductRowItemView: View {
 
     @State private var imageAnimationTrigger: Bool = false
     private var imageWidth: CGFloat = 60.0
-    
+
     enum ImageAnimationPhases: CaseIterable {
         case origin
         case left
         case right
-        
+
         func randomDuration(interval: TimeInterval, withVariance variance: Double) -> TimeInterval {
             let random = (Double(arc4random_uniform(1000)) - 500.0) / 500.0
             return interval + variance * random
         }
-        
+
         static var phases: [ImageAnimationPhases] {
             [ImageAnimationPhases.origin] + [ImageAnimationPhases.left, ImageAnimationPhases.right].shuffled()
         }
-        
+
         var offset: Double {
             switch self {
             case .left:
-                return -2.0
+                -2.0
             case .right:
-                return 4.0
+                4.0
             case .origin:
-                return 0.0
+                0.0
             }
         }
-        
+
         var angle: Double {
             switch self {
             case .left:
-                return -2.0
+                -2.0
             case .right:
-                return 2.0
+                2.0
             case .origin:
-                return 0.0
+                0.0
             }
         }
     }
@@ -79,17 +79,18 @@ struct ProductRowItemView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     .frame(width: imageWidth, height: imageWidth)
                     .phaseAnimator(ImageAnimationPhases.phases,
-                                   trigger: imageAnimationTrigger) { content, phase in
-                        content.offset(x: phase.offset)
-                            .rotationEffect(Angle.degrees(phase.angle))
-                    } animation: { phase in
-                            return .easeInOut(
-                                duration: phase.randomDuration(
-                                    interval: 0.18,
-                                    withVariance: 0.025
-                                )
-                            )
-                    }
+                                   trigger: imageAnimationTrigger)
+                { content, phase in
+                    content.offset(x: phase.offset)
+                        .rotationEffect(Angle.degrees(phase.angle))
+                } animation: { phase in
+                    .easeInOut(
+                        duration: phase.randomDuration(
+                            interval: 0.18,
+                            withVariance: 0.025
+                        )
+                    )
+                }
 
                 VStack(alignment: .leading) {
                     Text(product.name)

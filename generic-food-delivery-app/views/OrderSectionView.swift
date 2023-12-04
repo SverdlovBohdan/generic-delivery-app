@@ -1,5 +1,5 @@
 //
-//  OrderView.swift
+//  OrderSectionView.swift
 //  generic-food-delivery-app
 //
 //  Created by Bohdan Sverdlov on 14.11.2023.
@@ -14,7 +14,7 @@ struct OrderSectionView: View {
     @Bindable private var viewState: OrderViewStateStore
 
     init(viewState: Bindable<OrderViewStateStore>) {
-        self._viewState = viewState
+        _viewState = viewState
     }
 
     var body: some View {

@@ -15,9 +15,9 @@ enum NavigationAction: CustomStringConvertible {
     var description: String {
         switch self {
         case .openProductView:
-            return "openProductView"
+            "openProductView"
         case .openRootView:
-            return "openRootView"
+            "openRootView"
         }
     }
 }

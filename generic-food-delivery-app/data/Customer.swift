@@ -15,9 +15,9 @@ struct Customer: Codable {
         var localized: String {
             switch self {
             case .cash:
-                return String(localized: "Cash")
+                String(localized: "Cash")
             case .card:
-                return String(localized: "Card")
+                String(localized: "Card")
             }
         }
     }

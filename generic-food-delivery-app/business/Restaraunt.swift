@@ -84,33 +84,33 @@ class Restaraunt: ProductsCatalog, CategoryDataGetter, ShoppingCartInteractor {
     func getEmoji(id: Int) -> String {
         switch id {
         case 14:
-            return "🥘"
+            "🥘"
         case 21:
-            return "🥘"
+            "🥘"
         case 23:
-            return "🥘"
+            "🥘"
         case 26:
-            return "🥘"
+            "🥘"
         case 2:
-            return "🥘"
+            "🥘"
         case 8:
-            return "🥘"
+            "🥘"
         case 10:
-            return "🥘"
+            "🥘"
         case 13:
-            return "🥘"
+            "🥘"
         case 11:
-            return "🥘"
+            "🥘"
         case 4:
-            return "🥘"
+            "🥘"
         case 7:
-            return "🥘"
+            "🥘"
         case 12:
-            return "🥘"
+            "🥘"
         case 3:
-            return "🥘"
+            "🥘"
         default:
-            return "🥘"
+            "🥘"
         }
     }
 }

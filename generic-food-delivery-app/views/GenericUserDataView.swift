@@ -45,7 +45,7 @@ struct GenericUserDataView<AccountViewType: View, OrderViewType: View>: View {
             if let orderSection {
                 @Bindable var orderState = orderViewState
                 orderSection($orderState)
-                
+
                 Section {
                     Button(action: {
                         print("### Make order button")
@@ -66,7 +66,7 @@ struct GenericUserDataView<AccountViewType: View, OrderViewType: View>: View {
     private var canUpdateAccount: Bool {
         accountViewState.isValid ?? false
     }
-    
+
     private var isAccountDataFull: Bool {
         accountViewState.error == nil
     }

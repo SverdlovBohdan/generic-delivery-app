@@ -14,9 +14,9 @@ enum AccountValidatorError: Error {
     var localized: String {
         switch self {
         case .emptyField:
-            return String(localized: "Empty field")
+            String(localized: "Empty field")
         case .notPhone:
-            return String(localized: "Doesn't look like phone number")
+            String(localized: "Doesn't look like phone number")
         }
     }
 }

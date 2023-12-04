@@ -11,9 +11,9 @@ extension Result {
     var isSuccess: Bool {
         switch self {
         case .success:
-            return true
+            true
         case .failure:
-            return false
+            false
         }
     }
 

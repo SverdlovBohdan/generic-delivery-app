@@ -23,25 +23,25 @@ enum AccountAction: CustomStringConvertible {
     var description: String {
         switch self {
         case let .update(account):
-            return "update(\(account.name))"
+            "update(\(account.name))"
         case let .changePaymentMethod(method):
-            return "changePaymentMethod(\(method))"
+            "changePaymentMethod(\(method))"
         case let .setValidationStatus(status):
-            return "validStatus(\(status))"
+            "validStatus(\(status))"
         case let .setError(error):
-            return "error(\(error))"
+            "error(\(error))"
         case let .setName(name):
-            return "setName(\(name))"
+            "setName(\(name))"
         case let .setPhone(email):
-            return "setEmail(\(email))"
+            "setEmail(\(email))"
         case .resetError:
-            return "resetError"
+            "resetError"
         case let .removeAddress(indexes):
-            return "removeAddress \(indexes)"
+            "removeAddress \(indexes)"
         case let .changeDefaultAddress(index):
-            return "changeDefaultAddress \(index)"
+            "changeDefaultAddress \(index)"
         default:
-            return "AccountAction"
+            "AccountAction"
         }
     }
 }
