@@ -25,15 +25,6 @@ struct AccountSectionView: View {
         self.editable = editable
     }
 
-    init(editable: Bool, viewState: AccountViewStateStore,
-         accountRepository: AccountRepository, inputValidator: AccountUserInputValidator)
-    {
-        self.editable = editable
-        self.viewState = viewState
-        self.accountRepository = accountRepository
-        self.inputValidator = inputValidator
-    }
-
     var body: some View {
         Section {
             Label(
@@ -74,7 +65,11 @@ struct AccountSectionView: View {
                 performInputValidation()
             }
         } header: {
-            Text(addressesTitle)
+            HStack {
+                Text(addressesTitle)
+                Spacer()
+                Label(String(localized: "swipe to remove"), systemImage: "hand.point.up.left.and.text")
+            }
         }
         .onAppear(perform: {
             viewState.dispatch(action: .update(accountRepository.read()))

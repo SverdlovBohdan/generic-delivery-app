@@ -10,4 +10,5 @@ import Foundation
 struct ShoppingCartItem: Codable, Identifiable, Hashable {
     var id: UUID
     var product: ProductItem
+    var isPresented: Bool = true
 }
