@@ -9,21 +9,21 @@ import SwiftUI
 
 struct AddressesView: View {
     var addresses: [Customer.Address]
-    
+
     // TODO: Extract to viewStore
     @State private var street: String = ""
     @State private var appartment: String = ""
     @State private var canAddNewAddress: Bool = true
-    
+
     typealias NewAddressCallback = (Customer.Address) -> Void
     let willAdd: NewAddressCallback?
-    
+
     typealias RemoveAddressCallback = (IndexSet) -> Void
     let willRemove: RemoveAddressCallback?
-    
+
     typealias ChangeDefaultAddressCallback = (Int) -> Void
     let willDefaultChange: ChangeDefaultAddressCallback?
-    
+
     init(addresses: [Customer.Address], didAdd: NewAddressCallback? = nil,
          didRemove: RemoveAddressCallback? = nil,
          didDefaultChange: ChangeDefaultAddressCallback? = nil)
@@ -33,15 +33,15 @@ struct AddressesView: View {
         willRemove = didRemove
         willDefaultChange = didDefaultChange
     }
-    
+
     private var addressesList: some DynamicViewContent {
         ForEach(addresses.indices, id: \.self) { idx in
             HStack {
                 Text("\(addresses[idx].street) \(addresses[idx].appartment)")
                     .lineLimit(2)
-                
+
                 Spacer()
-                
+
                 Text("✅")
                     .opacity(addresses[idx].isDefault ? 1.0 : 0.0)
                     .animation(.easeOut, value: addresses[idx].isDefault)
@@ -51,7 +51,7 @@ struct AddressesView: View {
             }
         }
     }
-    
+
     var body: some View {
         List {
             addressesList
@@ -59,15 +59,15 @@ struct AddressesView: View {
                     willRemove?(indexSet)
                 })
         }
-        
+
         HStack {
             TextField(String(localized: "Street"), text: $street)
                 .lineLimit(1)
-            
+
             TextField(String(localized: "Appartment"), text: $appartment)
                 .lineLimit(1)
         }
-        
+
         Button(String(localized: "Add address")) {
             willAdd?(.init(street: street, appartment: appartment))
             street.removeAll()

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(NavigationStore.self) private var navigation: NavigationStore
-    
+
     private var navigationPathBinding: Binding<NavigationPath> {
         .init {
             navigation.path
@@ -17,7 +17,7 @@ struct ContentView: View {
             navigation.path = newValue
         }
     }
-    
+
     var body: some View {
         NavigationStack(path: navigationPathBinding) {
             TabView {
@@ -25,18 +25,18 @@ struct ContentView: View {
                     .tabItem {
                         Label("Menu", systemImage: "heart.text.square")
                     }
-                
+
                 OrderInfoView()
                     .tabItem {
                         Label("My order", systemImage: "basket")
                     }
-                
+
                 Form {
                     AccountInfoView(updatable: true)
                 }
-                    .tabItem {
-                        Label("Account", systemImage: "person")
-                    }
+                .tabItem {
+                    Label("Account", systemImage: "person")
+                }
             }
         }
     }

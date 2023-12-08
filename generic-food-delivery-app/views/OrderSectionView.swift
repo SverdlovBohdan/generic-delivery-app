@@ -9,14 +9,14 @@ import SwiftUI
 
 struct OrderSectionView: View {
     // TODO: Use DI
-    private var shoppingCart: ShoppingCartInteractor = Restaraunt.shared
-    
+    private let shoppingCart: ShoppingCartInteractor = Restaraunt.shared
+
     @Bindable private var viewState: OrderViewStateStore
-    
+
     init(viewState: Bindable<OrderViewStateStore>) {
         _viewState = viewState
     }
-    
+
     var body: some View {
         Section {
             ForEach(viewState.viewState.items.indices, id: \.self) { idx in

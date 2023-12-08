@@ -21,7 +21,7 @@ enum OrderAction: CustomStringConvertible {
             "reset"
         case .setOrder:
             "setOrder"
-        case .setCustomerData(_):
+        case .setCustomerData:
             "setCustomerData"
         }
     }
@@ -39,11 +39,11 @@ struct OrderState {
             if item.isPresented {
                 return totalCost + item.product.price
             }
-            
+
             return totalCost
         }
     }
-    
+
     var isAccountInfoFullfilled: Bool = false
 
     var isValid: Bool {

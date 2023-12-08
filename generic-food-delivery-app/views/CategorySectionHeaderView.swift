@@ -11,13 +11,9 @@ struct CategorySectionHeaderView: View {
     var categoryId: Int
 
     // TODO: Use DI
-    private var categoryData: CategoryDataGetter = Restaraunt.shared
+    private let categoryData: CategoryDataGetter = Restaraunt.shared
 
     @State private var name: String = ""
-
-    init(categoryId: Int) {
-        self.categoryId = categoryId
-    }
 
     var body: some View {
         HStack {

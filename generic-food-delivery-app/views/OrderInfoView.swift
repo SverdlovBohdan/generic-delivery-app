@@ -1,5 +1,5 @@
 //
-//  GenericUserDataView.swift
+//  OrderInfoView.swift
 //  generic-food-delivery-app
 //
 //  Created by Bohdan Sverdlov on 14.11.2023.
@@ -14,7 +14,7 @@ struct CustomerDataForOrderPreferenceKey: PreferenceKey {
     }
 
     static var defaultValue: CustomerData = .init(customer: .unknownUser, isValid: false)
-    
+
     static func reduce(value: inout CustomerData, nextValue: () -> CustomerData) {
         value = nextValue()
     }
@@ -22,20 +22,20 @@ struct CustomerDataForOrderPreferenceKey: PreferenceKey {
 
 struct OrderInfoView: View {
     @State private var viewState: OrderViewStateStore = .makeDefault()
-    
+
     // TODO: Use DI
-    private var accountRepository: AccountRepository = AccountUserDefaults()
-    
+    private let accountRepository: AccountRepository = AccountUserDefaults()
+
     var body: some View {
         Form {
             AccountInfoView(updatable: false)
                 .onPreferenceChange(CustomerDataForOrderPreferenceKey.self, perform: { value in
                     viewState.dispatch(action: .setCustomerData(value))
                 })
-            
+
             @Bindable var orderState = viewState
             OrderSectionView(viewState: $orderState)
-            
+
             Button(action: {
                 print("### Make order button")
             }, label: {
@@ -50,17 +50,17 @@ struct OrderInfoView: View {
             .disabled(!viewState.viewState.isValid || !isAccountFulfilled)
         }
     }
-    
+
     private var isAddressKnown: Bool {
         !viewState.customer.addresses.isEmpty
     }
-    
+
     private var isUserInfoFulfilled: Bool {
         !viewState.customer.name.isEmpty && !viewState.customer.phone.isEmpty
     }
-    
+
     private var isAccountFulfilled: Bool {
-        return viewState.isCustomerDataValid && isAddressKnown && isUserInfoFulfilled
+        viewState.isCustomerDataValid && isAddressKnown && isUserInfoFulfilled
     }
 }
 
