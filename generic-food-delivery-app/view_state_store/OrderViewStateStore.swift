@@ -11,7 +11,7 @@ enum OrderAction: CustomStringConvertible {
     case setOrder([ShoppingCartItem])
     case removeItem(Int)
     case reset
-    case setAccoutFullfilledFlag(Bool)
+    case setCustomerData(CustomerDataForOrderPreferenceKey.CustomerData)
 
     var description: String {
         switch self {
@@ -21,8 +21,8 @@ enum OrderAction: CustomStringConvertible {
             "reset"
         case .setOrder:
             "setOrder"
-        case let .setAccoutFullfilledFlag(isFulfilled):
-            "setAccoutFullfilledFlag \(isFulfilled)"
+        case .setCustomerData(_):
+            "setCustomerData"
         }
     }
 }
@@ -31,6 +31,8 @@ struct OrderState {
     var items: [ShoppingCartItem] = []
     var isSendingToRestaraunt: Bool = false
     var error: String?
+    var customer: Customer = .unknownUser
+    var isCustomerDataValid: Bool = false
 
     var total: Float {
         items.reduce(.zero) { totalCost, item in
@@ -62,9 +64,9 @@ func orderReducer(currentState: inout OrderState,
         currentState.items.remove(at: index)
     case .reset:
         currentState = .init()
-        
-    case let .setAccoutFullfilledFlag(isValid):
-        currentState.isAccountInfoFullfilled = isValid
+    case let .setCustomerData(customerData):
+        currentState.customer = customerData.customer
+        currentState.isCustomerDataValid = customerData.isValid
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Customer: Codable {
+struct Customer: Codable, Equatable {
     enum PaymentMethod: CaseIterable, Codable {
         case cash
         case card

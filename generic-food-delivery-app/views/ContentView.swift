@@ -32,7 +32,7 @@ struct ContentView: View {
                     }
                 
                 Form {
-                    AccountInfoView()
+                    AccountInfoView(updatable: true)
                 }
                     .tabItem {
                         Label("Account", systemImage: "person")
